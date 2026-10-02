@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Service</title>
+</head>
+<body>
+    <h1>✅ Dashboard Service Running</h1>
+
+    <h2>Users</h2>
+    <p>{{ users }}</p>
+
+    <h2>Products</h2>
+    <ul>
+        {% for p in products %}
+        <li>{{ p.name }} - ₹{{ p.price }} (Stock: {{ p.stock }})</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Orders</h2>
+    <ul>
+        {% for o in orders %}
+        <li>Order #{{ o.id }} | User: {{ o.user_id }} | Product: {{ o.product_id }} | Qty: {{ o.quantity }} | Status: {{ o.status }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Payments</h2>
+    <ul>
+        {% for pay in payments %}
+        <li>Payment #{{ pay.id }} | Order: {{ pay.order_id }} | Amount: ₹{{ pay.amount }} | Status: {{ pay.status }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Notifications</h2>
+    <ul>
+        {% for n in notifications %}
+        <li>User: {{ n.user_id }} | Message: {{ n.message }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

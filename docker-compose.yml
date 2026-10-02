@@ -1,0 +1,36 @@
+services:
+  user:
+    build: ./user-service
+    ports:
+      - "5000:5000"
+    restart: always
+
+  product:
+    build: ./product-service
+    ports:
+      - "6001:6001"
+    restart: always
+
+  order:
+    build: ./order-service
+    ports:
+      - "6002:6002"
+    restart: always
+
+  payment:
+    build: ./payment-service
+    ports:
+      - "6003:6003"
+    restart: always
+
+  notification:
+    build: ./notification-service
+    ports:
+      - "6004:6004"
+    restart: always
+
+  dashboard:
+    build: ./dashboard-service
+    ports:
+      - "6005:6005"
+    restart: always
