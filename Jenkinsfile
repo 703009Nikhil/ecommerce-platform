@@ -7,6 +7,10 @@ pipeline {
         IMAGE_NAME = "user-service"
         CLUSTER_NAME = "my-eks-cluster"
         DEPLOYMENT_NAME = "user-deployment"
+
+        // AWS credentials injected from Jenkins
+        AWS_ACCESS_KEY_ID = credentials('aws-creds')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-creds')
     }
 
     stages {
@@ -34,10 +38,10 @@ pipeline {
 
         stage('Login to ECR') {
             steps {
-                script {
-                    sh '''aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 593964941429.dkr.ecr.ap-southeast-2.amazonaws.com/my-ecom-service
-'''
-                }
+                sh '''
+                aws ecr get-login-password --region ap-southeast-2 | \
+                docker login --username AWS --password-stdin 593964941429.dkr.ecr.ap-southeast-2.amazonaws.com/my-ecom-service
+                '''
             }
         }
 
