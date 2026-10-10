@@ -8,8 +8,7 @@ pipeline {
         CLUSTER_NAME = "my-eks-cluster"
         DEPLOYMENT_NAME = "user-deployment"
 
-        AWS_ACCESS_KEY_ID = credentials('aws-access-key')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key')
+        AWS_CREDS = credentials('aws-creds')
     }
 
     stages {
@@ -35,11 +34,20 @@ pipeline {
             }
         }
 
+        stage('Set AWS Env') {
+            steps {
+                script {
+                    env.AWS_ACCESS_KEY_ID = env.AWS_CREDS_USR
+                    env.AWS_SECRET_ACCESS_KEY = env.AWS_CREDS_PSW
+                }
+            }
+        }
+
         stage('Login to ECR') {
             steps {
                 sh '''
-                aws ecr get-login-password --region ap-southeast-2 | \
-                docker login --username AWS --password-stdin 593964941429.dkr.ecr.ap-southeast-2.amazonaws.com/my-ecom-service
+                aws ecr get-login-password --region ${AWS_REGION} | \
+                docker login --username AWS --password-stdin ${ECR_REPO}
                 '''
             }
         }
