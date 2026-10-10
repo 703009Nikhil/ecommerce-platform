@@ -8,9 +8,8 @@ pipeline {
         CLUSTER_NAME = "my-eks-cluster"
         DEPLOYMENT_NAME = "user-deployment"
 
-        // AWS credentials injected from Jenkins
-        AWS_ACCESS_KEY_ID = credentials('aws-creds')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-creds')
+        AWS_ACCESS_KEY_ID = credentials('aws-access-key')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key')
     }
 
     stages {
